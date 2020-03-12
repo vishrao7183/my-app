@@ -1,0 +1,699 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Yet Another Node.js Blogg Application API",
+      "description": "Yet Another Node.js Blogg Application API",
+      "license": {
+        "name": "mit",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:4477",
+    "basePath": "/",
+  
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "securityDefinitions":{
+        "Bearer":{
+            "type":"apiKey",
+            "name":"Authorization",
+            "in" :"header",
+            "bearerFormat":"JWT"
+        }
+    },
+    "consumes" : [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/api/userSignUp": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        }
+      },
+      "/api/userLogin": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/user"
+              }
+            }
+          }
+        }
+      },
+      "/api/getProduct": {
+        "parameters": [
+          {
+            "name":"auth-token",
+            "in":"header",
+            "require":true,
+            "discription":"token verification"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "caregoryNmae that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "pageno",
+            "in": "query",
+            "description": "pageNo",
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "size",
+            "type": "string"
+          }
+        ],
+        "get": {
+            "tags": [
+              "user"
+            ],
+            "summary": "Get all product in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/category"
+                }
+              }
+            }
+          }
+        },
+        "/api/viewCart": {
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "categoryName",
+              "in": "path",
+              "required": true,
+              "description": "caregoryNmae that we want to find",
+              "type": "string"
+            }
+          ],
+          "get": {
+              "tags": [
+                "user"
+              ],
+              "summary": "Get all product in system",
+              "responses": {
+                "200": {
+                  "description": "OK",
+                  "schema": {
+                    "$ref": "#/definitions/category"
+                  }
+                }
+              }
+            }
+          },
+        "/api/saveCart": {
+          "post": {
+            "tags": [
+              "user"
+            ],
+            "description": "Create new user in system",
+            "parameters": [
+              {
+                "name":"auth-token",
+                "in":"header",
+                "discription":"token verification"
+              },
+              {
+                "name": "user",
+                "in": "body",
+                "description": "User that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/user"
+                }
+              }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "New user is created",
+                "schema": {
+                  "$ref": "#/definitions/user"
+                }
+              }
+            }
+          }
+        },
+      "/api/adminSignUp": {
+        "post": {
+          "tags": [
+            "admin"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "admin",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            }
+          }
+        }
+      },
+      "/api/adminLogin": {
+        "post": {
+          "tags": [
+            "admin"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "admin",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/admin"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+          }
+        }
+      },
+      "/api/postProduct": {
+        "post": {
+          "tags": [
+            "Product"
+          ],
+          "description": "Create new product in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "productName",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productPrize",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "categorys",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productImage",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"file"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New product is created",
+              "schema": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        }
+      },
+      "/api/updateProduct": {
+        "post": {
+          "tags": [
+            "Product"
+          ],
+          "description": "updated new product in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "productName",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productPrize",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "categorys",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productImage",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"file"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New product  is updated",
+              "schema": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        }
+      },
+      
+      "/api/deleteProduct": {
+        "post": {
+          "tags": [
+            "Product"
+          ],
+          "description": "delete new product in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "productName",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productPrize",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "categorys",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"String"
+            },
+            {
+              "name": "productImage",
+              "in": "formData",
+              "description": "product that we want to create",
+              "type":"file"
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "product is delete",
+              "schema": {
+                "$ref": "#/definitions/product"
+              }
+            }
+          }
+        }
+      },
+      "/api/viewProduct": {
+        "parameters": [
+          {
+            "name":"auth-token",
+            "in":"header",
+            "discription":"token verification"
+          },
+          {
+            "name": "product",
+            "in": "path",
+            "description": "ProductName that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "pageno",
+            "in": "query",
+            "description": "ProductName that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "ProductName that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+            "tags": [
+              "Product"
+            ],
+            "summary": "Get all product in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/product"
+                }
+              }
+            }
+          }
+        },
+      "/api/postCategory": {
+        "post": {
+          "tags": [
+            "Category"
+          ],
+          "description": "Create new category in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "Category",
+              "in": "body",
+              "description": "category that we want to create",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New category is created",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          }
+        }
+      },
+      "/api/updateCategory": {
+        "post": {
+          "tags": [
+            "Category"
+          ],
+          "description": "update new category in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "category",
+              "in": "body",
+              "description": "category that we want to update",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New category is update",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          }
+        }
+       
+      },
+      "/api/deleteCategory": {
+        "post": {
+          "tags": [
+            "Category"
+          ],
+          "description": "delete category in system",
+          "parameters": [
+            {
+              "name":"auth-token",
+              "in":"header",
+              "discription":"token verification"
+            },
+            {
+              "name": "Category",
+              "in": "body",
+              "description": "category that we want to delete",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "category is deleted",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          }
+        }
+        
+      },
+      "/api/viewCategory": {
+        "parameters": [
+          {
+            "name":"auth-token",
+            "in":"header",
+            "require": true,
+            "discription":"token verification"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "caregoryNmae that we want to find",
+            "type": "string"
+          },
+          {
+            "name": "pageno",
+            "in": "query",
+            "description": "pageNo",
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "size",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Category"
+          ],
+          "summary": "Get category with given ID",
+          "responses": {
+            "200": {
+              "description": "category is found",
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "user": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      },
+      "admin": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "emailId": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "product": {
+        "required": [
+          
+        ],
+        "properties": {
+          "productName":[{
+            "type" : "String",
+            "require": true
+            
+        }],
+        "productPrize":[{
+            "type" : "String",
+            "require": true
+            
+        }],
+        "productImage":[{
+            "type" : "String",
+            "require": true
+        }],
+        "categorys":{
+          "type": "String",
+          "require": true,
+          "$ref": "#/definitions/category"
+        }
+        }
+      },
+      "category": {
+        
+        "properties": {
+          "categoryName":[{
+            "type" : "String",
+            "require": true
+            
+        }]
+        
+         
+        }
+      },
+      "cart": {
+       
+        "properties": {
+          "productName":[{
+            "type" : "String",
+            "require": true
+            
+        }],
+        "productPrize":[{
+            "type" : "String",
+            "require": true
+            
+        }],
+        "productImage":[{
+            "type" : "String",
+            "require": true
+        }],
+        "qty":[{
+          "type" : "String"
+      }],
+      "totalPrize" :{
+          "type" :"String",
+          "require" : true
+      }
+        }
+      }
+    }
+  }
